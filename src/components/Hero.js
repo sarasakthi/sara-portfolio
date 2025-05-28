@@ -435,6 +435,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
+
             <div className="about-text">
               <ul className="about-list">
                 <li className="about-text-intro">

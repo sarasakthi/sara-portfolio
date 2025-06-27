@@ -22,7 +22,7 @@ const Hero = () => {
 
   // Calculate years of experience
   const currentYear = new Date().getFullYear();
-  const careerStartYear = 2022;
+  const careerStartYear = 2020;
   const yearsOfExperience = currentYear - careerStartYear;
 
   // Tech Slider

@@ -73,8 +73,8 @@ When I’m not coding, I enjoy reading, staying active, and spending quality tim
 To run this project locally:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Sarasakthi/sara-portfolio.git
+cd sara-portfolio
 npm install
 npm start
 ```
@@ -85,8 +85,7 @@ This will start the project on `http://localhost:3000/`.
 
 ## 🔄 Deployment
 
-The portfolio is deployed on **[Deployment Platform]**.  
-To redeploy:
+The portfolio is deployed on **[Github]**.
 
 ```bash
 npm run build
@@ -99,8 +98,8 @@ npm run build
 
 Feel free to connect or reach out through:
 
-- 📧 Email: saraswathi@example.com
-- 💼 LinkedIn: [linkedin.com/in/saraswathi-sakthikumar](https://www.linkedin.com/in/saraswathi-sakthikumar)
+- 📧 Email: sarasakthikumar@gmail.com
+- 💼 LinkedIn: [linkedin.com/in/saraswathi-sakthikumar](https://www.linkedin.com/in/saraswathisakthikumar)
 
 ---
 

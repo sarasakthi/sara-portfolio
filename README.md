@@ -15,6 +15,7 @@ This site was built using **React** to showcase Sara’s technical expertise, pr
 ## 👋 About Sara
 
 Hello! I’m **Saraswathi Sakthikumar**, but you can call me **Sara**.  
+
 I'm a **Full Stack Developer and Systems Analyst** based in the Edmonton area with over **5 years of experience** in web development and database management.
 
 I’m passionate about building **smart, scalable, and meaningful software solutions** that empower engineers and drive innovation. With a strong foundation in technologies like **.NET, JavaScript, and React**, I bring a problem-solving mindset to every project.

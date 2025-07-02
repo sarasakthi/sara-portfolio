@@ -8,7 +8,7 @@ This site was built using **React** to showcase Sara’s technical expertise, pr
 
 ## 🌐 Live Site
 
-🔗 [Visit Sara's Portfolio](https://your-deployment-link.com)
+🔗 [Visit Sara's Portfolio](https://sarasakthi.github.io/sara-portfolio/)
 
 ---
 

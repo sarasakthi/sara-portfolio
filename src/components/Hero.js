@@ -25,6 +25,9 @@ const Hero = () => {
   const careerStartYear = 2020;
   const yearsOfExperience = currentYear - careerStartYear;
 
+  // Resume path
+  const resumePath = `https://sarasakthi.github.io/resume-host/resume_sara.pdf`;
+
   // Tech Slider
   const techItems = [
     {
@@ -395,10 +398,11 @@ const Hero = () => {
                 </p>
                 <br />
                 <a
-                  href={`${process.env.PUBLIC_URL}/myresumeSara.pdf`}
-                  download="Sara-Sakthikumar-Resume.pdf"
-                  className="cta-button bold-only"
-                >
+                    href={resumePath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-button bold-only"
+                  >
                   Download My Resume
                 </a>
               </div>
@@ -425,7 +429,7 @@ const Hero = () => {
                 </div>
                 <div className="about-learnmore-resume">
                   <a
-                    href={`${process.env.PUBLIC_URL}/myresumeSara.pdf`}
+                    href={resumePath}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="about-learnmore-button"
@@ -1391,7 +1395,7 @@ const Hero = () => {
 
           <div className="resume-download">
             <a
-              href={`${process.env.PUBLIC_URL}/myresumeSara.pdf`}
+              href={resumePath}
               target="_blank"
               rel="noopener noreferrer"
               className="resume-download-button"
@@ -1402,7 +1406,7 @@ const Hero = () => {
 
           <div className="resume-content">
             <iframe
-              src={`${process.env.PUBLIC_URL}/myresumeSara.pdf`}
+              src={resumePath}
               title="Resume Viewer"
               width="100%"
               height="800px"

@@ -1,36 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { dbFirebase } from "../firebase.js";
-import { doc, getDoc } from "firebase/firestore";
 import "./WeatherCard.css";
 
 const WeatherCard = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [apiKey, setApiKey] = useState("");
 
-  // Get API key from Firestore
-  const fetchApiKey = async () => {
-    try {
-      const docRef = doc(dbFirebase, "storedcredentials", "openweathermap");
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        return docSnap.data().apikey;
-      } else {
-        throw new Error("API key not found");
-      }
-    } catch (err) {
-      console.error("Error fetching API key:", err);
-      setError("Missing API key.");
+  // API key from .env
+  const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
+
+  // Fetch weather data
+  const fetchWeather = async (lat, lon) => {
+    if (!API_KEY) {
+      setError("API key missing. Check your .env file.");
+      setLoading(false);
+      return;
     }
-  };
 
-  const fetchWeather = async (lat, lon, key) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       );
       setWeatherData(res.data);
       setError(null);
@@ -42,34 +33,26 @@ const WeatherCard = () => {
     }
   };
 
+  // Get location and fetch weather
   useEffect(() => {
-    const getWeatherWithKey = async () => {
-      const key = await fetchApiKey();
-      if (!key) return;
-
-      setApiKey(key);
-
+    const getWeather = () => {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            fetchWeather(
-              position.coords.latitude,
-              position.coords.longitude,
-              key
-            );
+            fetchWeather(position.coords.latitude, position.coords.longitude);
           },
           () => {
-            console.warn("Location access denied. Falling back to Edmonton.");
-            fetchWeather(53.5461, -113.4938, key); // Edmonton
+            console.warn("Location access denied. Using Edmonton as fallback.");
+            fetchWeather(53.5461, -113.4938); // Edmonton
           }
         );
       } else {
-        console.warn("Geolocation not supported. Using fallback.");
-        fetchWeather(53.5461, -113.4938, key);
+        console.warn("Geolocation not supported. Using Edmonton as fallback.");
+        fetchWeather(53.5461, -113.4938); // Edmonton
       }
     };
 
-    getWeatherWithKey();
+    getWeather();
   }, []);
 
   if (loading)
@@ -83,33 +66,31 @@ const WeatherCard = () => {
     );
 
   if (error || !weatherData || !weatherData.main)
-    return (
-      <div className="weather-card error">
-        {error || "Weather unavailable."}
-      </div>
-    );
+    return <div className="weather-card error">{error || "Weather unavailable."}</div>;
 
   const { temp } = weatherData.main;
-  // const description = weatherData.weather?.[0]?.description;
+  const { name } = weatherData;
+  const weatherIcon = weatherData.weather?.[0]?.icon;
 
   return (
     <div className="weather-card">
       <div className="weather-header">
-        <img
-          src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-          alt="Weather Icon"
-          className="weather-icon"
-        />
+        {weatherIcon && (
+          <img
+            src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+            alt="Weather Icon"
+            className="weather-icon"
+          />
+        )}
         <span className="weather-temp">
           {Math.round(temp)}°C
-          <p className="weather-city">{weatherData.name}</p>
+          <p className="weather-city">{name}</p>
         </span>
       </div>
-      {/* 
-      <div className="weather-details">
-        <p className="weather-desc">{description}</p>
-      </div>
-      */}
+      {/* Uncomment if you want description */}
+      {/* <div className="weather-details">
+        <p className="weather-desc">{weatherData.weather?.[0]?.description}</p>
+      </div> */}
     </div>
   );
 };

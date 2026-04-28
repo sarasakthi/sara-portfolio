@@ -1450,7 +1450,7 @@ const Hero = () => {
                     <a href="tel:+18258232463">+1 (825)-823-2463</a>
                   </li>
                   <li>
-                    <span className="bold-only">Location</span>: Edmonton, AB,
+                    <span className="bold-only">Location</span>: Sherwood Park, AB,
                     Canada
                   </li>
                 </ul>
